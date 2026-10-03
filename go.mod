@@ -5,7 +5,7 @@ go 1.27.1
 require (
 	github.com/coder/websocket v1.8.15
 	github.com/stretchr/testify v1.12.1
-	github.com/zugcat/zob v0.0.0-20261001163119-69c0a19676f6
+	github.com/zugcat/zob v0.0.0-20261003052222-0c7336146893
 	golang.org/x/sync v0.23.0
 	golang.org/x/tools v0.50.0
 )

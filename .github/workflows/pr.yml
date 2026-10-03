@@ -1,0 +1,42 @@
+name: PR Check
+
+on: [ pull_request ]
+
+jobs:
+  check:
+    name: 'check'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: 'checkout'
+        uses: actions/checkout@v7
+        with:
+            ref: ${{ inputs.ref }}
+            persist-credentials: false
+
+      - name: 'setup go'
+        uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+          cache: true
+          cache-dependency-path: go.sum
+
+      - name: tidy
+        run: |
+          go mod tidy --diff
+
+      - name: format
+        run: |
+          gofmt -l -d .
+
+      - name: vet
+        run: |
+          go vet ./...
+
+      - name: test
+        run: |
+          go test -v ./...
+          
